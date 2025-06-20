@@ -1,4 +1,4 @@
-<h1>Novo Sup {{$support->id}}</h1>
+<h1>Novo Suporte</h1>
 
 <form action="{{route('supports.store')}}" method="post">
     @csrf

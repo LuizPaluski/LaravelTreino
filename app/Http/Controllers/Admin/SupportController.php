@@ -17,6 +17,8 @@ class SupportController extends Controller
         if(!$support = Support::find($id)){
             return back();
     }
+
+    return view('admin/supports/show', compact('support'));
 }
     public function create(){
         return view('admin/supports/create');
@@ -49,6 +51,15 @@ class SupportController extends Controller
         'subject',
         'body',
     ]));
+    return redirect()->route('supports.index');
+    }
+
+    public function destroy(string|int $id){
+          if(!$support = Support::find($id)) {
+            return back();
+    }
+    $support->delete();
+
     return redirect()->route('supports.index');
     }
 }
