@@ -3,7 +3,7 @@
 <table>
     <thead>
     <th>Assunto</th>
-    <th>Status</th>
+    <th hidden>Status</th>
     <th>Descricao</th>
     <th></th>
 </thead>
@@ -12,7 +12,7 @@
 @foreach ($supports as $support)
     <tr>
         <td>{{$support->subject}}</td>
-        <td>{{$support->status}}</td>
+        <td hidden>{{$support->status}}</td>
         <td>{{$support->body}}</td>
         <td>
             <a href="{{route('supports.show', $support->id)}}">Ir</a>
