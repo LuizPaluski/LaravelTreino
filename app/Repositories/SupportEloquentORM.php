@@ -1,8 +1,11 @@
 <?php
+namespace App\Repositories;
 
 use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
+use App\Models\Support;
 use App\Repositories\SupportRepositoryInterface;
+use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface
 {
@@ -17,7 +20,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
                 $query->where('subject', $filter);
             }
         })
-        ->paginete()
+        ->get()
         ->toArray(); 
     }
     public function findOne(string $id): stdClass|null{
@@ -28,7 +31,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         return (object) $support->toArray();
     }
     public function delete(string $id):void{
-        $this->model->findOrFail( $id )->delete;
+        $this->model->findOrFail( $id )->delete();
     }
     public function new(CreateSupportDTO $dto): stdClass{
         $support = $this->model->create(
