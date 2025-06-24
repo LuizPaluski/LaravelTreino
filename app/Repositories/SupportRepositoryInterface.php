@@ -7,6 +7,7 @@ use App\DTO\UpdateSupportDTO;
 use stdClass;
 
 interface SupportRepositoryInterface{
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInferface;
     public function getall(string $filter = null) : array;
     public function findOne(string $id): stdclass|null;
     public function delete(string $id):void;
