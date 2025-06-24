@@ -4,7 +4,7 @@ namespace App\Repositories;
 use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
 use App\Models\Support;
-use App\Repositories\SupportRepositoryInterface;
+use App\Repositories\PaginationPresenter;
 use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface
@@ -13,22 +13,23 @@ class SupportEloquentORM implements SupportRepositoryInterface
         protected Support $model
     ){}
 
-    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInferface
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationPresenter
     {
-        $result =  $this->model
+        $result = $this->model
         ->where(function ($query) use ($filter) {
             if($filter){
                 $query->where('subject', $filter);
+                $query->orWhere('body','like', $filter);
             }
         })
         ->paginate($totalPerPage, ['*'], 'page', $page);
-        return new PaginataionPresenter($result);
+        dd($result);
     }
-    
 
 
 
-    public function getall(string $filter = null) : array{
+
+    public function getAll(string $filter = null) : array{
         return $this->model
         ->where(function ($query) use ($filter) {
             if($filter){
@@ -36,10 +37,10 @@ class SupportEloquentORM implements SupportRepositoryInterface
             }
         })
         ->get()
-        ->toArray(); 
+        ->toArray();
     }
     public function findOne(string $id): stdClass|null{
-        $support = $this->model->find($id);
+        $support = $this->model->Find($id);
         if(!$support){
             return null;
         }
@@ -62,6 +63,6 @@ class SupportEloquentORM implements SupportRepositoryInterface
             (array) $dto
         );
         return (object) $support->toArray();
- 
+
     }
 }

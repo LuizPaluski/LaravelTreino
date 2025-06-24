@@ -4,11 +4,11 @@ namespace App\Repositories;
 
 use stdClass;
 
-interface PaginationInferface
+interface PaginationInterface
 {
     /**
-     * 
-     * 
+     *
+     *
      * @return stdClass[]
      */
     public function items() : array;

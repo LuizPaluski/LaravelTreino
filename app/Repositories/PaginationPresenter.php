@@ -4,7 +4,7 @@ namespace App\Repositories;
 use illuminate\Pagination\LengthAwarePaginator;
 use stdClass;
 
-class PaginataionPresenter implements PaginationInferface
+class PaginationPresenter implements PaginationInterface
 {
     /**
      * Summary of items
@@ -20,8 +20,8 @@ class PaginataionPresenter implements PaginationInferface
 
     }
     /**
-     * 
-     * 
+     *
+     *
      * @return stdClass[]
      */
     public function items() : array{
@@ -47,7 +47,7 @@ class PaginataionPresenter implements PaginationInferface
         return $this->paginator->currentPage() - 1;
     }
 
-    private function resolveitems(array $items): array{ 
+    private function resolveitems(array $items): array{
         $response = [];
         foreach($items as $item){
             $stdClassObject = new stdClass;

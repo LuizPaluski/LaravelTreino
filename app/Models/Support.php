@@ -14,4 +14,8 @@ class Support extends Model
         'body',
         'status',
     ];
+
+    public function where(\Closure $param)
+    {
+    }
 }
