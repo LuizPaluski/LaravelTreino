@@ -13,19 +13,18 @@ class SupportEloquentORM implements SupportRepositoryInterface
         protected Support $model
     ){}
 
-    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationPresenter
-    {
-        $result = $this->model
-        ->where(function ($query) use ($filter) {
-            if($filter){
+   public function paginate( int $page = 1, int $totalPerPage = 15, string $filter = null):PaginationPresenter{
+    
+    $result = $this->model
+        ->where(function ($query) use ($filter){
+            if ($filter){
+                $query->where("name","like","%".$filter."%");
                 $query->where('subject', $filter);
-                $query->orWhere('body','like', $filter);
             }
-        })
-        ->paginate($totalPerPage, ['*'], 'page', $page);
-        dd($result);
-    }
-
+            })
+            ->paginate($page, $totalPerPage);
+    
+   }
 
 
 

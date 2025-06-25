@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use illuminate\Pagination\LengthAwarePaginator;
+use App\Repositories\PaginationInterface;
 use stdClass;
 
 class PaginationPresenter implements PaginationInterface
@@ -16,7 +17,7 @@ class PaginationPresenter implements PaginationInterface
         protected LengthAwarePaginator $paginator
     )
     {
-        $this->items = $this->resolveitems($this->$paginator->items());
+        $this->items = $this->resolveItems($this->$paginator->items());
 
     }
     /**
@@ -47,7 +48,7 @@ class PaginationPresenter implements PaginationInterface
         return $this->paginator->currentPage() - 1;
     }
 
-    private function resolveitems(array $items): array{
+    private function resolveItems(array $items): array{
         $response = [];
         foreach($items as $item){
             $stdClassObject = new stdClass;
