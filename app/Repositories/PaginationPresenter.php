@@ -14,10 +14,10 @@ class PaginationPresenter implements PaginationInterface
     private array $items;
 
     public function __construct(
-        protected LengthAwarePaginator $paginator
+        protected LengthAwarePaginator $paginator,
     )
     {
-        $this->items = $this->resolveItems($this->$paginator->items());
+        $this->items = $this->resolveItems($this->paginator->items());
 
     }
     /**
