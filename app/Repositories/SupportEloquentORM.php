@@ -4,7 +4,6 @@ namespace App\Repositories;
 use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
 use App\Models\Support;
-use App\Repositories\PaginationPresenter;
 use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface
@@ -13,7 +12,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
         protected Support $model
     ){}
 
-   public function paginate( int $page = 1, int $totalPerPage = 15, string $filter = null):PaginationPresenter{
+   public function paginate( int $page = 1, int $totalPerPage = 15, string $filter = null):PaginationInterface{
     
     $result = $this->model
         ->where(function ($query) use ($filter){
@@ -23,6 +22,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
             }
             })
             ->paginate($page, $totalPerPage);
+            return new PaginationPresenter(paginator: $result);
     
    }
 
