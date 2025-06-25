@@ -25,5 +25,5 @@
 
 
 <x-pagination
-    :paginator="$supports"
+    :paginator="$supports"/>
 
