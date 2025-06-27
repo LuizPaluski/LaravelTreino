@@ -8,11 +8,13 @@ enum SupportStatus: string
     case C = 'closed';
     case P = 'pending';
 
-    public static function fromValues(string $status){
-        foreach (self::cases() as $case) {
-            if ($status === $status->name) {
+    public static function fromValues(string $name)
+    {
+        foreach (self::cases() as $status) {
+            if ($name === $status->name) {
                 return $status->value;
             }
         }
-            throw new \ValueError($status . "not found");
+        throw new \ValueError($status . "not found");
+    }
 }
